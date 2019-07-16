@@ -21,3 +21,17 @@ after_success:
   - docker push peinutz/multicontainer-nginx
   - docker push peinutz/multicontainer-server
   - docker push peinutz/multicontainer-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: us-east-1
+  app: multicontainer
+  env: Multicontainer-env
+  bucket_name: elasticbeanstalk-us-east-1-297840778032
+  bucket_path: multicontainer
+  on:
+    branch: master
+  access_key_id:
+    secure: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
